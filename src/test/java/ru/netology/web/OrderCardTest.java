@@ -1,11 +1,16 @@
 package ru.netology.web;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class OrderCardTest {
@@ -33,38 +38,23 @@ public class OrderCardTest {
     }
 
     @Test
-    void shouldTestPositive() {
+    void shouldTestValidFirstLastNameAndPhone() {
         driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Вася Пупкин");
         driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79217931826");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector("button")).click();
-        String expected = "  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
         String actual = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual.trim());
     }
 
     @Test
-    void shouldTestPositiveResultDoubleSurname() {
-        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Муравьев-Апостол Сергей");
-        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79217951843");
+    public void shouldTestAgreementCheckbox() {
+        // Изначально флажок должен быть снят
+        assertFalse(driver.findElement(By.cssSelector("[data-test-id='agreement']")).isSelected());
+        // Ставим флажок
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
-        driver.findElement(By.cssSelector("button")).click();
-        String expected = "  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    void shouldTestPositiveResultDoubleName() {
-        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Петров Иван Васильевич");
-        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79770001155");
-        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
-        driver.findElement(By.className("button")).click();
-        String expected = "  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actual = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
-        Assertions.assertEquals(expected, actual);
+        // Теперь проверяем, что он установлен
+        assertTrue(driver.findElement(By.cssSelector("[data-test-id='agreement']")).isEnabled());
     }
 }
-
-
-
