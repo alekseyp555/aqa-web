@@ -1,6 +1,5 @@
-[![Java CI with Gradle](https://github.com/LevVolkov/TestingWeb/actions/workflows/gradle.yml/badge.svg)](https://github.com/LevVolkov/TestingWeb/actions/workflows/gradle.yml)
-[![Build status](https://ci.appveyor.com/api/projects/status/6vixklr4y47knu2b?svg=true)](https://ci.appveyor.com/project/LevVolkov/testingweb)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/i62b41da667trkjb/branch/main?svg=true)](https://ci.appveyor.com/project/alekseyp555/aqa-web/branch/main)
 # 3. Домашнее задание к занятию «2.1. Тестирование веб-интерфейсов»
 
 В качестве результата пришлите ссылку на ваш GitHub-проект в личном кабинете студента на сайте [netology.ru](https://netology.ru).
