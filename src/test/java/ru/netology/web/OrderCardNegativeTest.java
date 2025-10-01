@@ -23,7 +23,6 @@ public class OrderCardNegativeTest {
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
-        driver.get("http://localhost:9999");
     }
 
     @AfterEach
@@ -32,8 +31,10 @@ public class OrderCardNegativeTest {
         driver = null;
     }
 
+
     @Test
     void shouldNameInvaulibleTest() {
+        driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Bill Gates");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).clear();
         driver.findElement(By.className("button")).click();
@@ -44,6 +45,7 @@ public class OrderCardNegativeTest {
 
     @Test
     void shouldNameEmptyTest() {
+        driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79775550011");
         driver.findElement(By.className("button")).click();
         String expected = "Поле обязательно для заполнения";
@@ -53,6 +55,7 @@ public class OrderCardNegativeTest {
 
     @Test
     void shouldResultPhoneMinNumberTest() {
+        driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Вася Пупкин");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+7926");
         driver.findElement(By.className("button")).click();
@@ -63,6 +66,7 @@ public class OrderCardNegativeTest {
 
     @Test
     void shouldResultPhoneMaxNumberTest() {
+        driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Трубецкой Сергей");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+7926999999999999999999");
         driver.findElement(By.className("button")).click();
@@ -73,6 +77,7 @@ public class OrderCardNegativeTest {
 
     @Test
     void shouldPhoneEmptyTest() {
+        driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).clear();
         driver.findElement(By.className("button")).click();
@@ -83,6 +88,7 @@ public class OrderCardNegativeTest {
 
     @Test
     void shouldResultAgreementTest() {
+        driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Иванов Иван");
         driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79260001155");
         driver.findElement(By.cssSelector("button")).click();
@@ -91,3 +97,4 @@ public class OrderCardNegativeTest {
         Assertions.assertEquals(expected, actual);
     }
 }
+
